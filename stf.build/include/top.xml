@@ -410,7 +410,7 @@ limitations under the License.
 			<mkdir dir="@{destdir}"/>
 			<exec executable="curl" failonerror="true">
 				<env key="_ENCODE_FILE_NEW" value="UNTAGGED"/>
-				<arg value="-L"/>
+				<arg value="-kL"/>
 				<arg value="--fail"/>
 				<arg value="-o"/>
 				<arg value="@{destdir}/@{destfile}"/>
