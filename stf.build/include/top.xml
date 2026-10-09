@@ -240,7 +240,7 @@ limitations under the License.
 	</target>
 
 	<!--
-		Target to get log4j from https://archive.apache.org/dist/logging/log4j/${log4j-version}/apache-log4j-${log4j-version}-bin.zip
+		Target to get log4j from https://archive.apache.org/dist/logging/log4j/${log4j-version}/log4j-bin.zip
 		Copy to PREREQS_ROOT/log4j/log4j-api.jar and PREREQS_ROOT/log4j/log4j-core.jar
 	-->
 	<target name="configure-log4j" unless="log4j_available">
@@ -367,11 +367,11 @@ limitations under the License.
 	</target>
 
 	<target name="configure-asm" unless="asm_available">
-		<!-- Fetch asm from https://repo1.maven.org/etc. -->
+		<!-- Fetch asm from https://repository.ow2.org/etc. -->
 		<delete dir="${first_prereqs_root}/asm" failonerror="false"/>
-		<download-file destdir="${asm_dir}" destfile="${asm_file}" srcurl="https://repo1.maven.org/maven2/org/ow2/asm/asm/${asm-version}/asm-${asm-version}.jar"/>
+		<download-file destdir="${asm_dir}" destfile="${asm_file}" srcurl="https://repository.ow2.org/nexus/content/repositories/releases/org/ow2/asm/asm/${asm-version}/asm-${asm-version}.jar"/>
 		<verify-checksum file="${asm_dir}/${asm_file}" expected="${asm-sha256}"/>
-		<download-file destdir="${asm_dir}" destfile="${asm_commons_file}" srcurl="https://repo1.maven.org/maven2/org/ow2/asm/asm-commons/${asm-version}/asm-commons-${asm-version}.jar"/>
+		<download-file destdir="${asm_dir}" destfile="${asm_commons_file}" srcurl="https://repository.ow2.org/nexus/content/repositories/releases/org/ow2/asm/asm-commons/${asm-version}/asm-commons-${asm-version}.jar"/>
 		<verify-checksum file="${asm_dir}/${asm_commons_file}" expected="${asm-commons-sha256}"/>
 		<property name="asm" value="${asm_dir}/${asm_file}"/>
 		<property name="asm-commons" value="${asm_dir}/${asm_commons_file}"/>
@@ -387,7 +387,7 @@ limitations under the License.
 			<equals arg1="${os.name}" arg2="z/OS"/>
 	</condition>
 
-	<condition property="src-encoding" value="IBM-1047" else="UTF-8">
+	<condition property="src-encoding" value="UTF-8" else="UTF-8">
 		<isset property="isZOS"/>
 	</condition>
 
@@ -408,7 +408,7 @@ limitations under the License.
 			<echo message="Destination: @{destdir}/@{destfile}"/>
 			<echo message="Download tool: curl"/>
 			<mkdir dir="@{destdir}"/>
-			<exec executable="curl" failonerror="true">
+			<exec executable="curl">
 				<env key="_ENCODE_FILE_NEW" value="UNTAGGED"/>
 				<arg value="-kL"/>
 				<arg value="--fail"/>
