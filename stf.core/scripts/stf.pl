@@ -433,6 +433,7 @@ my ($now, $date, $time) = stf::stfUtility->getNow(date => $TRUE, time => $TRUE);
 	my $cmd = "$javahome_generation/bin/java " .
 			  "$java_debug_settings" .
 			  " -Dlog4j.skipJansi=true" .  # Suppress warning on Windows
+			  " -Dfile.encoding=IBM-1047" .
 			  " -Djava.system.class.loader=net.adoptopenjdk.stf.runner.StfClassLoader" .
 			  " -Dload.agent.path=$Bin/../../stf.load/bin/stf.load.jar" .
 			  " -classpath $asm_jar" . $sep . "$asm_commons_jar" . $sep . "$log4j_api_dir" . $sep . "$log4j_core_dir" . $sep . "$Bin/../bin" .
